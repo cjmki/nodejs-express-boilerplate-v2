@@ -1,0 +1,19 @@
+version: '2.2'
+services:
+  sql-node:
+    image: postgres:13
+    container_name: sql-$ENV-cluster
+    environment:
+      - POSTGRES_USER=$SQL_DB_USER
+      - POSTGRES_PASSWORD=$SQL_DB_PASSWORD
+      - POSTGRES_DB=$SQL_DB_NAME
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+
+volumes:
+  data01:
+    driver: local

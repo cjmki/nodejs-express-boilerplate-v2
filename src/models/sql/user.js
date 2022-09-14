@@ -28,10 +28,10 @@ export default (sequalize, DataTypes) => {
     {
       hooks: {
         afterCreate: (record) => {
-          delete record.dataValues.passwordDigest;
+          delete record.dataValues.password_digest;
         },
         afterUpdate: (record) => {
-          delete record.dataValues.passwordDigest;
+          delete record.dataValues.password_digest;
         },
       },
     }

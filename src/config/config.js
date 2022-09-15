@@ -9,7 +9,7 @@ const config = {
   },
   port: process.env.PORT,
   storage: {
-    base: process.env.STORAGE || path.join(__dirname, '..', '.storage'),
+    base: process.env.STORAGE || path.join(__dirname, '../..', '.storage'),
   },
   db: {
     url: process.env.SQL_DB_HOST,
@@ -20,6 +20,11 @@ const config = {
     dialect: 'postgres',
   },
 };
+
+config.env.isProd
+  ? (config.JWT_SECRET = process.env.JWT_SECRET)
+  : (config.JWT_SECRET =
+      "3S~VU|F][>M:*)o.>87/yk,X^Ml>)MebUwIv4a,!,j'x3Nl&2KMwZ@O&~m<-l");
 
 Object.keys(config.storage).forEach((item) =>
   fse.ensureDirSync(config.storage[item])

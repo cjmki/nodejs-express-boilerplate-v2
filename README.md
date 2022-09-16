@@ -4,11 +4,13 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Commands](#commands)
 - [Project Structure](#project-structure)
-- [API endpints](#api-endpoints)
-- [Databases](#databases)
+- [API Endpoints](#api-endpoints)
+- [Database](#database)
+  - [SQL - Postgres](#sql---postgres)
 - [Error Handling](#error-handling)
 - [Environment Variables](#environment-variables)
 - [Validation](#validation)
@@ -18,18 +20,22 @@
 
 ## Features
 
-- **ES7**: latest ECMAscript features using [babel](https://babeljs.io/)
-- **Bundling**: bundle assests using [webpack](https://webpack.js.org/)
-- **NoSQL database**: [elasticsearch](https://www.elastic.co/)
-- **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
+- **ES7 Support**: [babel](https://babeljs.io/)
+- **Build tool**: [webpack](https://webpack.js.org/)
+- **Data validation**: [Joi](https://github.com/hapijs/joi)
 - **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
-- **Testing**: unit using [mochajs](https://mochajs.org/) and [chai](https://www.chaijs.com/)
-- **Environment variables**: using [dotenv-flow](https://www.npmjs.com/package/dotenv-flow)
-- **CI**: continuous integration with [Github workflows](https://guides.github.com/introduction/flow/)
-- **Docker support using docker compose**
+- **TDD**: [mochajs](https://mochajs.org/) and [chai](https://www.chaijs.com/)
+- **Environment variables**:  [dotenv-flow](https://www.npmjs.com/package/dotenv-flow)
+- **CI**: [Github workflows](https://guides.github.com/introduction/flow/)
+- **Docker compose to run databse cluster ([postgre](https://www.postgresql.org))**
 
 ## Commands
 
+Start the SQL server via docker compose
+```bash
+# start docker cluster 
+docker-compose --env-file ./.env.*env mode* up
+```
 Running locally:
 
 ```bash
@@ -65,20 +71,17 @@ npm run lint
 
 Docker:
 
-```bash
-# start docker cluster 
-docker-compose --env-file ./.env.*env mode* up
-```
 
 ## Project Structure
 
 ```
+.storage\           # Store logging files and assests 
+contrib\            # Test data related things
 src\
- |--.storage\       # Store logging files and assests 
  |--config\         # Configuration related things
  |--exceptions\     # Custom exceptions 
  |--middlewares\    # Custom express middlewares
- |--models\         # Elastcisearch and SQL models (data layer)
+ |--models\         # SQL models (data layer)
  |--routes\         # Routes
  |--services\       # Business logic (service layer)
  |--utils\          # Utility classes and functions
@@ -91,22 +94,10 @@ src\
 List of available routes:
 
 **Item routes**:\
-`GET /v1/:lang/items/:id` - get item by id\
-`POST /v1/:lang/items/` - add new items\
-`PUT /v1/:lang/items/:id` - update item by id\
-`DELETE /v1/:lang/items/:id` - delete item by id
+`GET  /api/v1/user/:id` - \
+`POST /api/v1/user/login` - 
 
-**Search routes**:\
-`GET /v1/search` - seach items by text\
-`GET /v1/suggest` - suggest items by text (using elasticsearch's search as you type feature)\
-`GET /v1/filter` - filter items by query
-
-## Databases
-
-### NOSQL - Elasticsearch
-
-- Kibana instance is added to the docker cluster to visualize data
-- Use username : elastic and password : root to login as security is enabled in the docker cluster
+## Database
 ### SQL - Postgres
 
 - Please check the [TODO list](#todo-list)

@@ -1,4 +1,4 @@
-import models from '../src/models/sql';
+import models from '../../src/models/sql';
 import users from './sql/users';
 
 const main = async () => {

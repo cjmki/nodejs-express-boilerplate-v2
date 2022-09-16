@@ -1,6 +1,6 @@
 import schema from './schema';
 import login from '../../services/user/login';
-import findById from '../../services/user/findById';
+import validateRequest from '../../util/validateRequest';
 
 const controller = {};
 
@@ -9,21 +9,10 @@ controller.postLogin = async (req, res) => {
     ...req.body,
   };
 
-  const validated = await schema.postLogin.validateAsync(params);
-  const data = await login(validated);
+  const validated = await validateRequest(params, schema.postLogin);
+  const token = await login(validated);
 
-  res.json(data);
-};
-
-controller.getUserById = async (req, res) => {
-  const params = {
-    id: req.params.id,
-  };
-
-  const validated = await schema.getUserById.validateAsync(params);
-  const data = await findById(validated.id);
-
-  res.json(data);
+  res.json({ data: token });
 };
 
 export default controller;

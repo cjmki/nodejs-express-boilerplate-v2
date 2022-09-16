@@ -1,14 +1,11 @@
 import Joi from 'joi';
+import email from '../../util/unit-schemas.js/email';
 
 let schema = {};
 
 schema.postLogin = Joi.object({
-  email: Joi.string().required(),
+  email: email.required(),
   password: Joi.string().required(),
-});
-
-schema.getUserById = Joi.object({
-  id: Joi.string().required(),
 });
 
 export default schema;

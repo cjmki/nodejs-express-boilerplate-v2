@@ -23,19 +23,24 @@ app.get('/health', (req, res) => {
   res.status(200).send('health : ok');
 });
 
-setupRoutes(app, '/api/v1');
+setupRoutes(app, '/');
 
 app.use(errorMiddleware);
 
-logger.info(`Application env : ${process.env.NODE_ENV}`);
-
-app.listen(config.port, (err) => {
-  if (err) {
-    logger.error(err);
-  } else {
-    logger.info(`Server listening on : ${config.port}`);
-  }
+app.use((req, res) => {
+  console.log('No route matched');
+  res.status(404).json({ error: { message: '404' } });
 });
+
+if (!config.env.isTest) {
+  app.listen(config.port, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      logger.info(`Running on port ${config.port}`);
+    }
+  });
+}
 
 sanityChecker.initiate();
 

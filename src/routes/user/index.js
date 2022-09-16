@@ -6,9 +6,9 @@ import common from '../../util/constants/common';
 
 const router = express.Router();
 
-router.post('/user/login', cee(controller.postLogin));
+router.post('/users/login', cee(controller.postLogin));
 router.get(
-  '/user/:id',
+  '/users/:id',
   cee(auth(common.USER_ROLES)),
   cee(controller.getUserById)
 );

@@ -1,4 +1,4 @@
-![test](https://github.com/CJMki/nodejs-express-boilerplate-v2/actions/workflows/workflow-test.yml/badge.svg)   ![build](https://github.com/CJMki/nodejs-express-boilerplate-v2/actions/workflows/workflow-build.yml/badge.svg)
+[![tests](https://github.com/cjmki/nodejs-express-boilerplate-v2/actions/workflows/workflow-test.yml/badge.svg)](https://github.com/cjmki/nodejs-express-boilerplate-v2/actions/workflows/workflow-test.yml)  [![build](https://github.com/cjmki/nodejs-express-boilerplate-v2/actions/workflows/workflow-build.yml/badge.svg)](https://github.com/cjmki/nodejs-express-boilerplate-v2/actions/workflows/workflow-build.yml)
 
 - Inspired from [hagopj13's-nodexpress-boilerplate](https://github.com/hagopj13/node-express-boilerplate)
 

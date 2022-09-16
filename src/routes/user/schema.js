@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import email from '../../util/unit-schemas.js/email';
+import email from '../../util/unit-schemas/email';
 
 let schema = {};
 

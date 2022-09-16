@@ -1,4 +1,4 @@
-![test](https://github.com/CJMki/cj-s-nodejs-express-boilerplate/actions/workflows/workflow-test.yml/badge.svg)   ![build](https://github.com/CJMki/cj-s-nodejs-express-boilerplate/actions/workflows/workflow-build.yml/badge.svg)
+![test](https://github.com/CJMki/nodejs-express-boilerplate-v2/actions/workflows/workflow-test.yml/badge.svg)   ![build](https://github.com/CJMki/nodejs-express-boilerplate-v2/actions/workflows/workflow-build.yml/badge.svg)
 
 - Inspired from [hagopj13's-nodexpress-boilerplate](https://github.com/hagopj13/node-express-boilerplate)
 
@@ -6,11 +6,11 @@
 
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
-- [Commands](#commands)
+- [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
 - [Database](#database)
-  - [SQL - Postgres](#sql---postgres)
+  - [SQL - Postgre](#sql---postgre)
 - [Error Handling](#error-handling)
 - [Environment Variables](#environment-variables)
 - [Validation](#validation)
@@ -23,18 +23,22 @@
 - **ES7 Support**: [babel](https://babeljs.io/)
 - **Build tool**: [webpack](https://webpack.js.org/)
 - **Data validation**: [Joi](https://github.com/hapijs/joi)
+- **ORM**: [Sequelize](https://sequelize.org)
 - **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
 - **TDD**: [mochajs](https://mochajs.org/) and [chai](https://www.chaijs.com/)
 - **Environment variables**:  [dotenv-flow](https://www.npmjs.com/package/dotenv-flow)
 - **CI**: [Github workflows](https://guides.github.com/introduction/flow/)
 - **Docker compose to run databse cluster ([postgre](https://www.postgresql.org))**
 
-## Commands
+## Quick Start
 
 Start the SQL server via docker compose
 ```bash
 # start docker cluster 
 docker-compose --env-file ./.env.*env mode* up
+
+# populate test data
+npm run test:pop
 ```
 Running locally:
 
@@ -56,10 +60,7 @@ Testing:
 
 ```bash
 # run all tests
-npm run test:run
-
-# populate test data
-npm run test:pop
+npm run test
 ```
 
 Linting:
@@ -94,13 +95,12 @@ src\
 List of available routes:
 
 **Item routes**:\
-`GET  /api/v1/user/:id` - \
-`POST /api/v1/user/login` - 
+`POST /user/login` - 
 
 ## Database
-### SQL - Postgres
+### SQL - Postgre
 
-- Please check the [TODO list](#todo-list)
+Postgre database intergration with ORM support using [sequelize](https://sequelize.org)
 ## Error Handling
 
 The express app has a centralized error handling mechanism.
@@ -110,15 +110,15 @@ This utility will catch the errors propagated within the app from the error hand
 ```javascript
 import cee from '../../util/catchExpressExceptions';
 
-router.post('/:lang/items/', cee(controller.postItem));
+router.post('/users/login', cee(controller.postLogin));
 ```
 
 The error handling middleware sends an error response using the custom exception classes, which has the following format:
 
 ```json
 {
-  "code": 404,
-  "message": "Resource not found"
+  "code": 400,
+  "message": "Validation message"
 }
 ```
 
@@ -146,12 +146,4 @@ To modify the ESLint configuration, update the `.eslintrc.json` file. To modify 
 
 ## Todo list
 
-- Authentication and authorization using [jwt](https://www.npmjs.com/package/jsonwebtoken)
-- Implement caching mechanism 
-- Test mocking using [elastic-mock](https://www.npmjs.com/package/@elastic/elasticsearch-mock)
-- Add [postgres](https://hub.docker.com/_/postgres) to the docker cluster and utilize [sequalize](https://sequelize.org/) as ORM
-- API documentation auto generation using [swagger](https://www.npmjs.com/package/swagger)
-- Create ORM for elasticsearch for data migration and efficiency 
-- Graceful shutdown of express app
-- Handle image uploads 
-- Enable cors 
+- Introduce HATEOAS to navigate through resources in API layer ( [Use HATEOAS to enable navigation to related resources ](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design#use-hateoas-to-enable-navigation-to-related-resources))

@@ -1,3 +1,3 @@
-import Joi from 'Joi';
+import Joi from 'joi';
 
 export default Joi.string().email();
